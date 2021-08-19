@@ -1,7 +1,7 @@
 <template>
     <div class="layout">
         <a-spin :spinning="global.isLoading">
-            <a-layout  id="components-layout-custom-trigger">
+            <a-layout id="components-layout-custom-trigger">
                 <a-layout-sider  v-model="collapsed"  collapsible>
                     <div class="logo" :style="collapsed ? {textAlign:'center'} :'' ">
                         <img src="favicon.ico"/>
@@ -12,18 +12,18 @@
                             <template v-if="item.children">
                                 <a-sub-menu :key="item.path">
                                     <span slot="title">
-                                         <a-icon :type="item.icon"/>
+                                        <a-icon :type="item.icon" />
                                         <span>{{item.label}}</span>
                                     </span>
                                     <template v-if="item.children">
-                                        <a-menu-item v-for="childItem in item.children" :key="childItem.path">
+                                        <a-menu-item  v-for="childItem in item.children" :key="childItem.path" @click="switchPage(item.path,childItem.path)">
                                             {{childItem.label}}
                                         </a-menu-item>
                                     </template>
                                 </a-sub-menu>
                             </template>
                             <template v-else>
-                                <a-menu-item :key="item.path">
+                                <a-menu-item :key="item.path" @click="switchPage(item.path)">
                                     <a-icon :type="item.icon" />
                                     <span>{{item.label}}</span>
                                 </a-menu-item>
@@ -70,7 +70,7 @@
         data:()=>{
             return {
                 global,
-                collapsed: true,
+                collapsed: false,
                 menuSelected:[''],
                 breadcrumbSelected:{},//面包屑
                 firstPageRouter:"", //默认首页
@@ -86,11 +86,11 @@
                 this.$router.replace('/login');
             },
             goHome(){
-                this.$router.push(this.firstPageRouter);
-            }
-        },
-        watch:{
-            menuSelected(){
+
+            },
+            switchPage(parentPath,childrenPath=""){
+                let path=`${parentPath}/${childrenPath}`
+                this.$router.push(path);
             }
         },
         created() {

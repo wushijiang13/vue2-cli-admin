@@ -14,7 +14,6 @@ export default {
 }
 
 export {
-    // CLI_CONFIG,
     TITLE,
     perminssionParnent,
     PERMISSION_ROUTING,

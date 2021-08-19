@@ -1,7 +1,8 @@
 import './antd-theme.less';
-import Vue from 'vue';
 import {UI_CONFIG} from '@cli/cli.config';
+import Vue from 'vue';
 
+console.log(UI_CONFIG);
 console.log(`当前引入:${UI_CONFIG.introduce}`);
 
 function installUi(){
@@ -19,6 +20,9 @@ export function initUiImport(){
         resolve(isAll ? import("ant-design-vue").then(res=>{Vue.use(res.default)}) : isArray ? installUi(Vue) : undefined);
     })
 }
+
+
+
 
 
 

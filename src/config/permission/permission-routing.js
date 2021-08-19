@@ -7,10 +7,10 @@ export const PERMISSION_ROUTING=[
         name:'overview',
         label:'概览',
         component:layout,
-        redirect: '/dataview',
+        redirect: 'overview/dataview',
         children: [
             {
-                path: '/dataview',
+                path: 'dataview',
                 code: 'dataview',
                 label:"看板",
                 component:()=> import('@page/view/overview/dateview.vue')
@@ -18,11 +18,12 @@ export const PERMISSION_ROUTING=[
         ]
     },
     {
-        path: 'business',
+        path: '/business',
         code: 'business',
         icon: 'calculator',
         label:'业务',
         name: 'business',
+        redirect: 'business/financeReport',
         component: layout,
         children: [
             {
@@ -39,5 +40,10 @@ export const PERMISSION_ROUTING=[
                 component:()=> import('@page/view/business/orderReport'),
             }
         ]
+    },
+    {
+        path: '/*',
+        redirect: '/404',
+        label:'404',
     }
 ];

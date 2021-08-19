@@ -1,6 +1,8 @@
 import VueRouter from 'vue-router'
 import Vue from "vue";
 import {PERMISSION_ROUTING} from '@cli/cli.config';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css'
 Vue.use(VueRouter);
 
 /****
@@ -22,21 +24,24 @@ const router = new VueRouter({
         },
         {
             path: "/404",
-            component:()=> import("@page/404")
-        }
+            component:()=> import("@page/Layout-404")
+        },
     ]
 })
 
-console.log(PERMISSION_ROUTING);
 
 PERMISSION_ROUTING.forEach(item=>{
     router.addRoute(item);
 })
 
-
-
+NProgress.configure({ showSpinner: false });
 router.beforeEach((to, from, next) => {
+    NProgress.start();
     next();
 });
+
+router.afterEach(() => {
+    NProgress.done();
+})
 
 export default  router;
